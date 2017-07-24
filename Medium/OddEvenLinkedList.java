@@ -19,11 +19,28 @@ public class OddEvenLinkedList {
         if (head == null || head.next == null) {
             return head;
         }
-        ListNode ptr1 = head;
-        ListNode ptr2 = head.next;
-        while (head.next.next != null) {
-            ListNode temp = head.next.next;
-            ptr1.next = temp;
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode evenHead = even;
+        while (even != null && even.next != null) {
+            odd.next = odd.next.next;
+            even.next = even.next.next;
+            odd = odd.next;
+            even = even.next;
         }
+        odd.next = evenHead;
+        return head;
+    }
+    public static void main(String[] args) {
+        ListNode L = new ListNode(1);
+        L.next = new ListNode(2);
+        L.next.next = new ListNode(3);
+        L.next.next.next = new ListNode(1);
+        OddEvenLinkedList test = new OddEvenLinkedList();
+        L = test.oddEvenList(L);
+        System.out.println(L.val);
+        System.out.println(L.next.val);
+        System.out.println(L.next.next.val);
+        System.out.println(L.next.next.next.val);
     }
 }
